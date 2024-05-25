@@ -50,8 +50,12 @@ def get_hash(dict_obj):
         # as they should be equivalent
         if isinstance(value, np.ndarray):
             value[value == 0] = 0
-        elif isinstance(value, list) and 0 in value:
-            value = [type(tmp)(0) if tmp == 0 else tmp for tmp in value]
+        elif isinstance(value, list):
+            for index, tmp in enumerate(value):
+                if isinstance(tmp, np.ndarray):
+                    tmp[tmp == 0] = 0
+                elif tmp == 0:
+                    value[index] = type(tmp)(0)
 
         # Handle if value itself is float zero
         if isinstance(value, float) and value == 0:
