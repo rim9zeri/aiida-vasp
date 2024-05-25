@@ -116,7 +116,7 @@ class VaspCalcBase(CalcJob):
         """Add all objects required for restart to the list of objects to be copied from the previous calculation."""
         restart_folder = self.inputs.restart_folder
         computer = self.node.computer
-        included = ['CHGCAR', 'WAVECAR']
+        included = ['CHGCAR', 'WAVECAR', 'wannier90.win']
         existing_objects = restart_folder.listdir()
         to_copy = []
         for name in included:
